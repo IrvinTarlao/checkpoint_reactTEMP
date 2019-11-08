@@ -8,10 +8,6 @@ class Game extends Component {
         // console.log(this.game.name)
     }
 
-    componentDidMount = () => {
-        
-    }
-
     
     render() {
         
@@ -48,9 +44,8 @@ class Game extends Component {
                     <div>rating : {this.props.rating}</div>
                     <img style={imgstyle} src={this.props.image}/>
                     <div>
-                        <button style={buttonstyle}>DELETE</button>
-                    </div>
-                    
+                        <button style={buttonstyle} onClick={() => this.props.delete(this.props.id)}>DELETE</button>
+                    </div>                    
                 </div>
             </div>
            

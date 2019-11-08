@@ -22,14 +22,35 @@ class Gamelist extends Component {
 
     displayGames = () => {
         const {games} = this.state
-        const gamelist = games.map(item =>
+        const gamelist = games.map((item, index) =>
             <Game
-                id={item.id}
+                id={index}
                 name={item.name}
                 rating={item.rating}
                 image={item.background_image}
+                delete={this.deleteGame}
+                filter={this.filter}
              />)
         return gamelist
+    }
+
+    deleteGame = (id) => {
+        console.log(id)
+        const {games} = this.state
+        const deletedGame = games.splice(id, 1)
+        console.log(deletedGame)
+        this.setState({
+            games: games
+        }) 
+    }
+
+    filter = () => {
+        const {games} = this.state
+        const filteredArray = games.filter(item => item.rating >= 4.5)
+        console.log(filteredArray)
+        this.setState({
+            games: filteredArray
+        }) 
     }
 
     render() {
@@ -43,8 +64,14 @@ class Gamelist extends Component {
         };
 
         return (
-            <div style={containerstyle}>
-                {this.displayGames()}
+            <div>
+                <div>
+                    <button onClick={() => this.filter()}>Best games</button>
+                </div>
+
+                <div style={containerstyle}>
+                    {this.displayGames()}
+                </div>
             </div>
             
         )
